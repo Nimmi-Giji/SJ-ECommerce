@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}</p>
+      <p>Price: {{ product.price }}</p>
+      <p>Category: {{ product.category }}</p>
+      <h3>Reviews</h3>
+      {% for review in product.review_set.all %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ review.user.username }}</h5>
+          <p class="card-text">Rating: {{ review.rating }}/5</p>
+          <p class="card-text">{{ review.comment }}</p>
+        </div>
+      </div>
+      {% empty %}
+      <p>No reviews yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
