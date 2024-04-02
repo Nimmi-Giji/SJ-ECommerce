@@ -8,6 +8,22 @@
       <p>{{ product.description }}</p>
       <p>Price: {{ product.price }}</p>
       <p>Category: {{ product.category }}</p>
+      
+      <h3>Add a Review</h3>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="rating">Rating:</label>
+          <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="comment">Comment:</label>
+          <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+      
+
       <h3>Reviews</h3>
       {% for review in product.review_set.all %}
       <div class="card mb-3">
@@ -20,6 +36,8 @@
       {% empty %}
       <p>No reviews yet.</p>
       {% endfor %}
+
+      <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
     </div>
   </div>
 </div>
